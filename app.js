@@ -199,6 +199,31 @@ function renderDashboard(data) {
             <td>${fillBadge}</td>
             <td style="font-weight: 600; color: ${item.yearly_yield > 8 ? 'var(--accent-teal)' : 'var(--text-primary)'}">${item.yearly_yield ? `${item.yearly_yield} %` : "--"}</td>
         `;
+
+        // 🌟 點擊表格列自動帶入試算器
+        tr.style.cursor = "pointer";
+        tr.title = "點擊帶入此筆資料至上方試算器";
+        tr.addEventListener("click", () => {
+            if (item.price_before_ex) {
+                inputPrice.value = item.price_before_ex;
+            } else {
+                inputPrice.value = "";
+            }
+            if (item.dividend) {
+                inputDividend.value = item.dividend;
+            } else {
+                inputDividend.value = "";
+            }
+            // 執行計算
+            calculateArbitrage();
+            
+            // 平滑滾動回試算器區塊
+            document.querySelector(".calculator-panel").scrollIntoView({ 
+                behavior: "smooth",
+                block: "center"
+            });
+        });
+
         tableBody.appendChild(tr);
     });
 
