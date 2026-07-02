@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元大高股息 (0056) 歷年除權息數據儀表板</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Local Vanilla CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Firebase SDK Compat (Legacy API mode for direct browser usage) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>元大高股息 (0056)</h1>
+            <p>歷年股利政策及除權息數據分析平台</p>
+        </header>
+
+        <!-- Controls -->
+        <section class="controls-panel">
+            <div class="source-toggle">
+                <button id="btn-local" class="toggle-btn active">本地 JSON 檔案</button>
+                <button id="btn-firebase" class="toggle-btn">Firebase Firestore</button>
+            </div>
+            <div class="status-indicator">
+                <span class="status-dot" id="status-dot"></span>
+                <span id="status-text">目前資料來源: 本地 JSON 檔案</span>
+            </div>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="stats-grid">
+            <!-- Stats Card 1 -->
+            <div class="stat-card accent-blue">
+                <span class="title">最新配息金額</span>
+                <span class="value" id="stat-latest-div">-- 元</span>
+                <span class="desc" id="stat-latest-date">除息日期: --</span>
+            </div>
+            <!-- Stats Card 2 -->
+            <div class="stat-card accent-teal">
+                <span class="title">近一年累計股利</span>
+                <span class="value" id="stat-yearly-div">-- 元</span>
+                <span class="desc" id="stat-yearly-yield">殖利率估算: --%</span>
+            </div>
+            <!-- Stats Card 3 -->
+            <div class="stat-card accent-orange">
+                <span class="title">平均填息天數</span>
+                <span class="value" id="stat-avg-fill">-- 天</span>
+                <span class="desc" id="stat-total-records">總配息次數: -- 次</span>
+            </div>
+        </section>
+
+        <!-- Table Grid -->
+        <section class="table-container">
+            <div id="loading" class="loading-indicator">
+                <div class="spinner"></div>
+                <p>正在載入除權息資料...</p>
+            </div>
+            <table id="data-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>年度</th>
+                        <th>配息期別</th>
+                        <th>股利 (元)</th>
+                        <th>除息日</th>
+                        <th>發放日</th>
+                        <th>除息前股價 (元)</th>
+                        <th>填息天數</th>
+                        <th>年殖利率 (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Dynamic Rows Insertion -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Local Vanilla JS -->
+    <script src="app.js"></script>
+</body>
+</html>
