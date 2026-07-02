@@ -125,6 +125,10 @@ async function loadData() {
 
 // 從本地檔案獲取資料
 async function fetchLocalData() {
+    // 優先使用記憶體變數以繞過瀏覽器本地 CORS 限制
+    if (window.dividendData) {
+        return window.dividendData;
+    }
     const response = await fetch("dividend_data_0056.json");
     if (!response.ok) {
         throw new Error(`HTTP 錯誤: ${response.status}`);

@@ -132,9 +132,19 @@ def main():
     
     # 匯出 JSON
     json_file = f"dividend_data_{stock_no}.json"
+    js_file = f"dividend_data_{stock_no}.js"
+    records_dict_list = [r.to_dict() for r in records]
+    
     with open(json_file, 'w', encoding='utf-8-sig') as f:
-        json.dump([r.to_dict() for r in records], f, ensure_ascii=False, indent=4)
+        json.dump(records_dict_list, f, ensure_ascii=False, indent=4)
     print(f"[File] Exported JSON to: {os.path.abspath(json_file)}")
+    
+    # 匯出 JS (用於繞過瀏覽器本地 file 協議 CORS 限制)
+    with open(js_file, 'w', encoding='utf-8-sig') as f:
+        f.write("window.dividendData = ")
+        json.dump(records_dict_list, f, ensure_ascii=False, indent=4)
+        f.write(";")
+    print(f"[File] Exported JS to: {os.path.abspath(js_file)}")
     
     # 預覽轉換為 dict 的物件
     print("\n[Preview] Top 3 Firebase ready dict objects:")
