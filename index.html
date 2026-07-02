@@ -57,8 +57,63 @@
             </div>
         </section>
 
+        <!-- Calculator Panel -->
+        <section class="calculator-panel">
+            <h2 class="section-title">除權息價差套利試算器 (預設以最新除息數據估算)</h2>
+            <div class="calc-grid">
+                <!-- Inputs Column -->
+                <div class="calc-inputs">
+                    <div class="input-group">
+                        <label for="input-principal">投資本金 (元)</label>
+                        <input type="number" id="input-principal" value="500000" min="1000" step="1000">
+                    </div>
+                    <div class="input-group">
+                        <label for="input-price">除息前買入/賣出價 (元)</label>
+                        <input type="number" id="input-price" value="52.60" min="10" step="0.05">
+                    </div>
+                    <div class="input-group">
+                        <label for="input-dividend">單次配息金額 (元)</label>
+                        <input type="number" id="input-dividend" value="1.35" min="0.05" step="0.01">
+                    </div>
+                    <div class="input-group">
+                        <label for="input-discount">券商手續費折扣 (折)</label>
+                        <input type="number" id="input-discount" value="6" min="1" max="10" step="0.5">
+                    </div>
+                </div>
+                <!-- Results Column -->
+                <div class="calc-results">
+                    <div class="result-row">
+                        <span class="label">可買進股數</span>
+                        <span class="val" id="res-shares">-- 股 (0 張)</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="label">預估總交易成本</span>
+                        <span class="val" id="res-costs">-- 元</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="label">實領利息 (含匯費扣除)</span>
+                        <span class="val" id="res-net-dividend">-- 元</span>
+                        <span id="nhi-badge" class="badge badge-success" style="display: none; margin-top: 4px;">免扣健保費</span>
+                    </div>
+                    <div class="result-row highlight">
+                        <span class="label">填息後原價賣出淨利</span>
+                        <span class="val" id="res-net-profit">-- 元</span>
+                    </div>
+                    <div class="result-row highlight">
+                        <span class="label">預估淨報酬率</span>
+                        <span class="val" id="res-return-rate">-- %</span>
+                    </div>
+                    <div class="result-row-tax">
+                        <span class="label">💡 所得稅可抵減稅額 (8.5% 退稅紅利)</span>
+                        <span class="val" id="res-tax-credit">+ 0 元</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Table Grid -->
         <section class="table-container">
+            <h2 class="section-title">歷年配息與填息明細</h2>
             <div id="loading" class="loading-indicator">
                 <div class="spinner"></div>
                 <p>正在載入除權息資料...</p>
